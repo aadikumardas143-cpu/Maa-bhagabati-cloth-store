@@ -1,0 +1,6 @@
+{
+  "name": "Maa Bhagabati Cloth Store",
+  "description": "Official mobile store, saree catalog, customer ledger (Khata), billing counter, and inventory app for Maa Bhagabati Cloth Store.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

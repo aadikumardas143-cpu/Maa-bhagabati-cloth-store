@@ -1,0 +1,475 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Maa Bhagabati Cloth Store</title>
+    <style>
+        :root {
+            --primary: #7d003c;
+            --primary-dark: #3e001d;
+            --accent: #ffd9e2;
+            --bg: #fffbff;
+            --card-bg: #fce8ed;
+            --text: #1d1b20;
+            --bento-radius: 32px;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+        }
+
+        body {
+            background-color: var(--bg);
+            color: var(--text);
+            padding-bottom: 90px;
+        }
+
+        header {
+            background: #fffbff;
+            color: #1d1b20;
+            padding: 20px 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        header h1 {
+            font-size: 24px;
+            font-weight: 900;
+            color: #1d1b20;
+        }
+
+        header p {
+            font-size: 10px;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--primary);
+            margin-top: 4px;
+            font-weight: 900;
+        }
+
+        .search-container {
+            padding: 8px 20px;
+            background: #fffbff;
+        }
+
+        .search-input {
+            width: 100%;
+            padding: 16px 20px;
+            background: var(--card-bg);
+            border: none;
+            border-radius: 9999px;
+            font-size: 14px;
+            outline: none;
+            color: #1d1b20;
+        }
+
+        .banner {
+            margin: 16px 20px;
+            background: #ffd9e2;
+            border-radius: var(--bento-radius);
+            padding: 24px;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            position: relative;
+            overflow: hidden;
+            border: none;
+            min-height: 140px;
+        }
+
+        .banner-text h3 {
+            color: var(--primary-dark);
+            font-size: 24px;
+            font-weight: 900;
+            line-height: 1.1;
+            margin-bottom: 8px;
+        }
+
+        .banner-text p {
+            color: rgba(62, 0, 29, 0.7);
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        .banner-tag {
+            position: absolute;
+            top: 16px;
+            left: 16px;
+            background: rgba(255,255,255,0.5);
+            backdrop-filter: blur(4px);
+            color: var(--primary-dark);
+            padding: 4px 12px;
+            border-radius: 9999px;
+            font-size: 10px;
+            font-weight: 800;
+            text-transform: uppercase;
+        }
+
+        .section-title {
+            padding: 12px 20px;
+            font-size: 14px;
+            font-weight: 900;
+            color: #1d1b20;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 12px;
+            padding: 12px 20px;
+            grid-auto-rows: minmax(160px, auto);
+        }
+
+        .card {
+            background: var(--card-bg);
+            border-radius: var(--bento-radius);
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            border: 1px solid #f9d8e0;
+            padding: 16px;
+        }
+        
+        .card:nth-child(3n) {
+            grid-column: span 2;
+            flex-direction: row;
+            align-items: center;
+            background: #1d1b20;
+            color: #fff;
+            border: none;
+        }
+        .card:nth-child(3n) .card-img-placeholder {
+            width: 50px;
+            height: 50px;
+            border-radius: 16px;
+            background: rgba(255,255,255,0.1);
+            margin-right: 16px;
+            margin-bottom: 0;
+            font-size: 24px;
+            flex-shrink: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .card:nth-child(3n) .card-title {
+            color: #fff;
+            font-size: 15px;
+        }
+        .card:nth-child(3n) .card-category {
+            color: #ffd9e2;
+        }
+        .card:nth-child(3n) .price {
+            color: #fff;
+        }
+        .card:nth-child(3n) .btn-add {
+            background: #fff;
+            color: #1d1b20;
+        }
+        .card:nth-child(3n) .card-body {
+            flex-direction: row;
+            align-items: center;
+            width: 100%;
+        }
+        .card:nth-child(3n) .btn-add {
+            width: auto;
+            margin-left: auto;
+            padding: 8px 16px;
+            border-radius: 999px;
+            margin-top: 0;
+        }
+        .card:nth-child(3n) .price-row {
+            margin-bottom: 0;
+            margin-right: 12px;
+        }
+        
+        .card:nth-child(4n) {
+            background: #7c5800;
+            border-color: #7c5800;
+        }
+        .card:nth-child(4n) .card-title,
+        .card:nth-child(4n) .price {
+            color: #fff;
+        }
+        .card:nth-child(4n) .card-category {
+            color: rgba(255,255,255,0.7);
+        }
+        .card:nth-child(4n) .mrp {
+            color: rgba(255,255,255,0.5);
+        }
+        .card:nth-child(4n) .card-img-placeholder {
+            background: rgba(255,255,255,0.2);
+            border-radius: 16px;
+            height: 80px;
+            justify-content: center;
+        }
+        .card:nth-child(4n) .btn-add {
+            background: #fff;
+            color: #7c5800;
+        }
+        
+        .card:nth-child(5n) {
+            background: #eaddff;
+            border-color: #eaddff;
+        }
+        .card:nth-child(5n) .card-img-placeholder {
+            background: rgba(255,255,255,0.4);
+            border-radius: 16px;
+            height: 80px;
+            justify-content: center;
+        }
+        .card:nth-child(5n) .btn-add {
+            background: #21005d;
+            color: #fff;
+        }
+        
+        .card:nth-child(5n) .card-title,
+        .card:nth-child(5n) .price {
+            color: #21005d;
+        }
+
+        .card-img-placeholder {
+            width: 100%;
+            height: 80px;
+            background: transparent;
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+            font-size: 36px;
+            margin-bottom: 12px;
+        }
+
+        .card-body {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+        }
+
+        .card-title {
+            font-size: 13px;
+            font-weight: 900;
+            margin-bottom: 2px;
+            color: var(--primary-dark);
+            line-height: 1.2;
+        }
+
+        .card-category {
+            font-size: 10px;
+            color: rgba(62, 0, 29, 0.6);
+            margin-bottom: 8px;
+            font-weight: 700;
+        }
+
+        .price-row {
+            display: flex;
+            align-items: baseline;
+            gap: 6px;
+            margin-bottom: 12px;
+        }
+
+        .price {
+            font-weight: 900;
+            color: var(--primary-dark);
+            font-size: 16px;
+        }
+
+        .mrp {
+            font-size: 11px;
+            color: rgba(62, 0, 29, 0.4);
+            text-decoration: line-through;
+            font-weight: 600;
+        }
+
+        .btn-add {
+            width: 100%;
+            padding: 12px;
+            background: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 16px;
+            font-weight: 800;
+            font-size: 11px;
+            cursor: pointer;
+            transition: transform 0.1s;
+        }
+
+        .btn-add:active {
+            transform: scale(0.95);
+        }
+
+        .cart-bar {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: #fffbff;
+            padding: 16px 20px;
+            border-top: 1px solid #e7e0ec;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;
+        }
+
+        .cart-info span {
+            display: block;
+        }
+
+        .cart-count {
+            font-size: 11px;
+            font-weight: 800;
+            color: var(--primary-dark);
+        }
+
+        .cart-total {
+            font-size: 20px;
+            font-weight: 900;
+            color: var(--primary-dark);
+        }
+
+        .btn-checkout {
+            background: var(--primary);
+            color: #fff;
+            padding: 14px 24px;
+            border-radius: 20px;
+            border: none;
+            font-weight: 800;
+            font-size: 14px;
+            cursor: pointer;
+            transition: transform 0.1s;
+        }
+        
+        .btn-checkout:active {
+            transform: scale(0.95);
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>Maa Bhagabati Cloth Store</h1>
+        <p>✨ Exclusive Sambalpuri, Banarasi & Silk Handlooms ✨</p>
+    </header>
+
+    <div class="search-container">
+        <input type="text" class="search-input" id="searchInput" placeholder="Search sarees, dress materials, suits..." oninput="filterProducts()">
+    </div>
+
+    <div class="banner">
+        <div class="banner-text">
+            <h3>Festive Wedding Season Sale</h3>
+            <p>Flat 20% Off on Sambalpuri & Silk Sarees</p>
+        </div>
+        <div class="banner-tag">SPECIAL</div>
+    </div>
+
+    <div class="section-title">
+        <span>Featured Catalog</span>
+        <span style="font-size: 12px; color: #666;" id="itemCount">showing items</span>
+    </div>
+
+    <div class="grid" id="productGrid"></div>
+
+    <div class="cart-bar" id="cartBar">
+        <div class="cart-info">
+            <span class="cart-count" id="cartCount">0 items selected</span>
+            <span class="cart-total" id="cartTotal">₹0</span>
+        </div>
+        <button class="btn-checkout" onclick="checkout()">Generate Bill</button>
+    </div>
+
+    <script>
+        const products = [
+            { id: 1, title: 'Sambalpuri Ikat Silk Saree', category: 'Sambalpuri', price: 6500, mrp: 8200, icon: '🥻' },
+            { id: 2, title: 'Bomkai Handloom Cotton Saree', category: 'Handloom', price: 3400, mrp: 4200, icon: '🧵' },
+            { id: 3, title: 'Banarasi Katan Silk Saree', category: 'Banarasi', price: 9800, mrp: 12500, icon: '✨' },
+            { id: 4, title: 'Kanjeevaram Bridal Lehenga', category: 'Bridal', price: 15500, mrp: 18900, icon: '👑' },
+            { id: 5, title: 'Designer Chanderi Salwar Suit', category: 'Suits', price: 2800, mrp: 3500, icon: '👗' },
+            { id: 6, title: 'Pure Dupion Silk Kurta Set', category: "Men's Wear", price: 3200, mrp: 3990, icon: '👔' },
+            { id: 7, title: 'Unstitched Cotton Dress Material', category: 'Fabric', price: 1450, mrp: 1800, icon: '📐' },
+            { id: 8, title: 'Pasapalli Handloom Cotton Saree', category: 'Sambalpuri', price: 4200, mrp: 5100, icon: '🥻' }
+        ];
+
+        let cart = {};
+
+        function renderProducts(items) {
+            const grid = document.getElementById('productGrid');
+            grid.innerHTML = '';
+            document.getElementById('itemCount').innerText = `${items.length} items`;
+
+            items.forEach(p => {
+                const qty = cart[p.id] || 0;
+                const card = document.createElement('div');
+                card.className = 'card';
+                card.innerHTML = `
+                    <div class="card-img-placeholder">${p.icon}</div>
+                    <div class="card-body">
+                        <div class="card-title">${p.title}</div>
+                        <div class="card-category">${p.category}</div>
+                        <div class="price-row">
+                            <span class="price">₹${p.price.toLocaleString('en-IN')}</span>
+                            <span class="mrp">₹${p.mrp.toLocaleString('en-IN')}</span>
+                        </div>
+                        <button class="btn-add" onclick="addToCart(${p.id})">
+                            ${qty > 0 ? `Added (${qty}) +` : '+ Add to Bill'}
+                        </button>
+                    </div>
+                `;
+                grid.appendChild(card);
+            });
+        }
+
+        function filterProducts() {
+            const query = document.getElementById('searchInput').value.toLowerCase();
+            const filtered = products.filter(p => 
+                p.title.toLowerCase().includes(query) || p.category.toLowerCase().includes(query)
+            );
+            renderProducts(filtered);
+        }
+
+        function addToCart(id) {
+            cart[id] = (cart[id] || 0) + 1;
+            updateCartBar();
+            filterProducts();
+        }
+
+        function updateCartBar() {
+            let totalQty = 0;
+            let totalPrice = 0;
+            for (let id in cart) {
+                const qty = cart[id];
+                const p = products.find(x => x.id == id);
+                if (p && qty > 0) {
+                    totalQty += qty;
+                    totalPrice += p.price * qty;
+                }
+            }
+            document.getElementById('cartCount').innerText = `${totalQty} items selected`;
+            document.getElementById('cartTotal').innerText = `₹${totalPrice.toLocaleString('en-IN')}`;
+        }
+
+        function checkout() {
+            let totalQty = 0;
+            for (let id in cart) totalQty += cart[id];
+            if (totalQty === 0) {
+                alert('Please select at least one item to generate bill.');
+                return;
+            }
+            alert(`Bill created for Maa Bhagabati Cloth Store! Total: ${document.getElementById('cartTotal').innerText}`);
+        }
+
+        renderProducts(products);
+    </script>
+</body>
+</html>
